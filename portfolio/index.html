@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jacqueline Adelmann — Spatial Design, Materiality & Calm Tech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F9F8F5;
+      --bg-card: #FFFFFF;
+      --bg-muted: #F2EFE9;
+      --text-main: #18181A;
+      --text-muted: #66645E;
+      --text-light: #8E8B82;
+      --border: #E5E2DA;
+      --border-dark: #C8C4B7;
+      --accent: #2C3531;
+      --accent-tint: #ECEAE4;
+      --tag-bg: #EFECE6;
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-serif: 'Newsreader', Georgia, serif;
+      --font-mono: 'JetBrains Mono', Menlo, Consolas, monospace;
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg: #141413;
+      --bg-card: #1D1D1B;
+      --bg-muted: #242422;
+      --text-main: #ECEBE8;
+      --text-muted: #A09E96;
+      --text-light: #6E6D66;
+      --border: #2D2D2A;
+      --border-dark: #454440;
+      --accent: #E5E2DA;
+      --accent-tint: #282825;
+      --tag-bg: #272724;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Layout Container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* Header & Navigation */
+    header {
+      padding: 48px 0 32px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .brand-title {
+      font-family: var(--font-serif);
+      font-size: 2.1rem;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+
+    .brand-subtitle {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .theme-toggle, .btn-ghost {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .theme-toggle:hover, .btn-ghost:hover {
+      background-color: var(--tag-bg);
+      border-color: var(--border-dark);
+    }
+
+    /* Artist Bio / Hero Statement */
+    .hero {
+      padding: 48px 0 40px 0;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-manifesto {
+      font-family: var(--font-serif);
+      font-size: 1.45rem;
+      line-height: 1.45;
+      color: var(--text-main);
+      font-weight: 300;
+    }
+
+    .hero-manifesto em {
+      font-style: italic;
+      color: var(--text-main);
+    }
+
+    .hero-details {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-left: 1px solid var(--border);
+      padding-left: 32px;
+    }
+
+    .hero-spec-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .hero-spec-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .spec-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-light);
+    }
+
+    .spec-value {
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    /* Filter Controls */
+    .controls {
+      padding: 32px 0 24px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: none;
+      border: 1px solid transparent;
+      padding: 7px 14px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      letter-spacing: 0.02em;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-btn:hover {
+      color: var(--text-main);
+      background-color: var(--tag-bg);
+    }
+
+    .filter-btn.active {
+      background-color: var(--text-main);
+      color: var(--bg);
+      border-color: var(--text-main);
+    }
+
+    .work-counter {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      color: var(--text-light);
+    }
+
+    /* Projects Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 32px;
+      padding: 16px 0 80px 0;
+    }
+
+    .card {
+      grid-column: span 6;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .card:hover {
+      border-color: var(--border-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.04);
+    }
+
+    .card.featured {
+      grid-column: span 12;
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+    }
+
+    .card-img-wrap {
+      position: relative;
+      background-color: #FFFFFF;
+      overflow: hidden;
+      aspect-ratio: 16/10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+    }
+
+    .card.featured .card-img-wrap {
+      aspect-ratio: auto;
+      height: 100%;
+      min-height: 440px;
+      padding: 24px;
+    }
+
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .card:hover .card-img-wrap img {
+      transform: scale(1.025);
+    }
+
+    .card-body {
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-grow: 1;
+      border-top: 1px solid var(--border);
+    }
+
+    .card.featured .card-body {
+      border-top: none;
+      border-left: 1px solid var(--border);
+      padding: 40px;
+    }
+
+    .card-meta-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+
+    .card-category {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--text-light);
+    }
+
+    .card-medium {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .card-title {
+      font-family: var(--font-serif);
+      font-size: 1.45rem;
+      font-weight: 400;
+      line-height: 1.25;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+
+    .card.featured .card-title {
+      font-size: 1.85rem;
+      margin-bottom: 16px;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: auto;
+    }
+
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      padding: 3px 8px;
+      background-color: var(--tag-bg);
+      color: var(--text-muted);
+      border-radius: var(--radius-sm);
+      letter-spacing: 0.03em;
+    }
+
+    /* Modal / Lightbox Detail View */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(18, 18, 18, 0.88);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 20px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-content {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      max-width: 1240px;
+      width: 100%;
+      height: 88vh;
+      max-height: 88vh;
+      display: grid;
+      grid-template-columns: 1.32fr 1fr;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+      position: relative;
+      margin: auto;
+      animation: modalSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes modalSlide {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-media {
+      background-color: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 22px 24px 16px 24px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      border-right: 1px solid var(--border);
+      position: relative;
+      min-height: 0; /* CRITICAL: allows CSS grid item to shrink and scroll */
+      height: 100%;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .modal-media-header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .modal-media-caption {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .modal-media-zoom-btn {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-main);
+      background-color: var(--tag-bg);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+
+    .modal-media-zoom-btn:hover {
+      background-color: var(--border);
+      border-color: var(--border-dark);
+    }
+
+    .modal-media-img-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      flex: 1;
+      min-height: 220px;
+    }
+
+    .modal-media img {
+      max-width: 100%;
+      max-height: 64vh;
+      object-fit: contain;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+
+    .modal-gallery-thumbs {
+      display: flex;
+      gap: 8px;
+      margin-top: auto;
+      overflow-x: auto;
+      width: 100%;
+      padding: 10px 4px 4px 4px;
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .thumb-btn {
+      border: 2px solid transparent;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      cursor: pointer;
+      width: 68px;
+      height: 50px;
+      flex-shrink: 0;
+      background: #F2EFE9;
+      padding: 0;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .thumb-btn img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .thumb-btn:hover {
+      border-color: var(--border-dark);
+      transform: translateY(-1px);
+    }
+
+    .thumb-btn.active {
+      border-color: var(--text-main);
+      box-shadow: 0 0 0 1px var(--text-main);
+    }
+
+    .modal-text {
+      padding: 36px 36px 48px 36px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      min-height: 0; /* CRITICAL: allows CSS grid item to shrink and scroll */
+      height: 100%;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Elegant Custom Scrollbars for modal */
+    .modal-text::-webkit-scrollbar,
+    .modal-media::-webkit-scrollbar,
+    .modal-overlay::-webkit-scrollbar,
+    .modal-gallery-thumbs::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    .modal-text::-webkit-scrollbar-track,
+    .modal-media::-webkit-scrollbar-track,
+    .modal-overlay::-webkit-scrollbar-track,
+    .modal-gallery-thumbs::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.03);
+    }
+    .modal-text::-webkit-scrollbar-thumb,
+    .modal-media::-webkit-scrollbar-thumb,
+    .modal-overlay::-webkit-scrollbar-thumb,
+    .modal-gallery-thumbs::-webkit-scrollbar-thumb {
+      background: var(--border-dark);
+      border-radius: 4px;
+    }
+    .modal-text::-webkit-scrollbar-thumb:hover,
+    .modal-media::-webkit-scrollbar-thumb:hover,
+    .modal-overlay::-webkit-scrollbar-thumb:hover,
+    .modal-gallery-thumbs::-webkit-scrollbar-thumb:hover {
+      background: var(--text-muted);
+    }
+    .modal-text, .modal-media, .modal-overlay, .modal-gallery-thumbs {
+      scrollbar-width: thin;
+      scrollbar-color: var(--border-dark) rgba(0, 0, 0, 0.03);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      z-index: 10;
+      transition: var(--transition);
+    }
+
+    .modal-close:hover {
+      background-color: var(--tag-bg);
+      transform: scale(1.05);
+    }
+
+    .modal-meta {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-light);
+    }
+
+    .modal-title {
+      font-family: var(--font-serif);
+      font-size: 1.9rem;
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--text-main);
+    }
+
+    .modal-spec-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 16px;
+      background-color: var(--bg);
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      font-size: 0.8rem;
+    }
+
+    .modal-spec-cell {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-spec-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 2px;
+    }
+
+    .modal-spec-val {
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    .modal-section-title {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-light);
+      margin-bottom: 6px;
+    }
+
+    .modal-desc {
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+    }
+
+    /* Essay / Philosophy Section */
+    .philosophy-section {
+      padding: 72px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background-color: var(--bg-card);
+    }
+
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 64px;
+    }
+
+    .philosophy-sidebar h3 {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 300;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    .philosophy-sidebar p {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .philosophy-body {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    .philosophy-body h4 {
+      font-family: var(--font-sans);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-main);
+      letter-spacing: -0.01em;
+      margin-top: 8px;
+    }
+
+    .philosophy-body strong {
+      color: var(--text-main);
+    }
+
+    /* Footer */
+    footer {
+      padding: 64px 0 80px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .footer-title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 300;
+    }
+
+    .footer-sub {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-light);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    /* Print Stylesheet for PDF Export */
+    @media print {
+      body {
+        background: #FFFFFF !important;
+        color: #000000 !important;
+        font-size: 11pt;
+      }
+
+      header, .controls, .theme-toggle, .btn-ghost, .modal-overlay, footer {
+        display: none !important;
+      }
+
+      .container {
+        max-width: 100% !important;
+        padding: 0 !important;
+      }
+
+      .hero {
+        padding: 20pt 0 !important;
+        border-bottom: 2pt solid #000000 !important;
+      }
+
+      .grid {
+        display: block !important;
+      }
+
+      .card {
+        page-break-inside: avoid;
+        margin-bottom: 30pt;
+        border: 1pt solid #CCCCCC !important;
+        display: block !important;
+      }
+
+      .card-img-wrap {
+        max-height: 300pt;
+      }
+
+      .card-body {
+        padding: 16pt !important;
+      }
+
+      .philosophy-section {
+        page-break-before: always;
+        background: none !important;
+        border: none !important;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .hero-details {
+        border-left: none;
+        padding-left: 0;
+        border-top: 1px solid var(--border);
+        padding-top: 24px;
+      }
+      .card.featured {
+        grid-column: span 12;
+        grid-template-columns: 1fr;
+      }
+      .card {
+        grid-column: span 12;
+      }
+      .modal-overlay {
+        padding: 16px 12px;
+        align-items: flex-start;
+      }
+      .modal-content {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        max-height: none;
+        overflow: visible;
+        margin: 16px auto;
+      }
+      .modal-media {
+        height: auto;
+        max-height: none;
+        min-height: auto;
+        overflow: visible;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 20px 16px;
+      }
+      .modal-media img {
+        max-height: 52vh;
+      }
+      .modal-text {
+        height: auto;
+        max-height: none;
+        min-height: auto;
+        overflow: visible;
+        padding: 24px 20px 40px 20px;
+      }
+      .philosophy-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
+    @media (max-height: 620px) {
+      .modal-overlay {
+        align-items: flex-start;
+        padding: 16px 12px;
+      }
+      .modal-content {
+        height: auto;
+        max-height: none;
+        margin: 16px auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="header-top">
+        <div>
+          <h1 class="brand-title">Jacqueline Adelmann</h1>
+          <div class="brand-subtitle">Spatial Design · Materiality · Creative Technology & Quantitative Modeling</div>
+        </div>
+        <div class="nav-actions">
+          <a href="#philosophy" class="btn-ghost">Artist Statement</a>
+          <button class="btn-ghost" onclick="window.print()">Print / Export PDF</button>
+          <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme">◐ Mode</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero / Perspective -->
+    <section class="hero">
+      <div class="hero-manifesto">
+        Spatial design, physical prototyping, and intentional craft bridging tactile art with technology. Exploring how built spaces guide movement, how analog materials ground human attention, and how quantitative analysis models real-world interaction.
+      </div>
+      <div class="hero-details">
+        <ul class="hero-spec-list">
+          <li class="hero-spec-item">
+            <span class="spec-label">Focus Areas</span>
+            <span class="spec-value">Spatial Interaction · Low-Tech Art & Prototyping · Operations & Behavioral Analytics</span>
+          </li>
+          <li class="hero-spec-item">
+            <span class="spec-label">Core Mediums</span>
+            <span class="spec-value">Cardboard Topography, Thread on Canvas, Vector Calculus & Notation, Oil & Charcoal</span>
+          </li>
+          <li class="hero-spec-item">
+            <span class="spec-label">Themes</span>
+            <span class="spec-value">Pedestrian Movement, Tactile Materiality, Habits & Everyday Rituals</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Filter Controls -->
+    <section class="controls">
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">All Selected Works (10)</button>
+        <button class="filter-btn" data-filter="spatial">Spatial & Interaction</button>
+        <button class="filter-btn" data-filter="materiality">Materiality & Form</button>
+        <button class="filter-btn" data-filter="craft">Slow Craft & Habit</button>
+      </div>
+      <div class="work-counter" id="counterText">Showing 10 curated works</div>
+    </section>
+
+    <!-- Work Grid -->
+    <main class="grid" id="worksGrid">
+
+      <!-- PROJECT 1: FEATURED - SIDEWALK WALTZ -->
+      <article class="card featured" data-category="spatial" onclick="openModal('sidewalk-waltz')">
+        <div class="card-img-wrap">
+          <img src="images/arch_p2_sidewalk_waltz_featured_hero.jpg" alt="The Sidewalk Waltz: Complete Multi-Phase Architectural & Analytical Study">
+        </div>
+        <div class="card-body">
+          <div>
+            <div class="card-meta-top">
+              <span class="card-category">Spatial Interaction Design & Behavioral Analytics</span>
+              <span class="card-medium">3 Architectural Plates: Photocollage, Vector Calculus & Choreographic Notation</span>
+            </div>
+            <h2 class="card-title">The Sidewalk Waltz: Choreographing Everyday Collision</h2>
+            <p class="card-desc">
+              The complete three-plate architectural and algorithmic study interrogating how physical infrastructure prescribes human behavior. Analyzing an empirical scenario at Vassar College—a rushed pedestrian navigating a narrow sidewalk blocked by a slow-moving group—the project synthesizes real-world aerial site analysis, quadratic modeling, differential vector slope fields, definite calculus integration (73 ft² in-between buffer), photographic stride collage, and an original musical score and choreographic footstep duet ("Sidewalk Waltz"). A multi-disciplinary bridge between calm tech, low-tech craft, and quantitative operations modeling.
+            </p>
+          </div>
+          <div class="card-tags">
+            <span class="tag">Behavioral Modeling</span>
+            <span class="tag">Choreographic Score</span>
+            <span class="tag">Vector Slope Fields</span>
+            <span class="tag">Calculus Integration (73 ft²)</span>
+            <span class="tag">Vassar Campus Site Survey</span>
+            <span class="tag">Low-Tech Art</span>
+            <span class="tag">Calm Technology</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 2: JO MARCH MATURATION -->
+      <article class="card" data-category="craft" onclick="openModal('jo-march')">
+        <div class="card-img-wrap">
+          <img src="images/jo_march_embroidery_polyptych.jpg" alt="Jo March's Maturation Embroidery Polyptych">
+        </div>
+        <div class="card-body">
+          <div>
+            <div class="card-meta-top">
+              <span class="card-category">Fiber Art & Conceptual Craft</span>
+              <span class="card-medium">Red Thread on Canvas & Reclaimed Timber</span>
+            </div>
+            <h2 class="card-title">Jo March’s Maturation: The Cost of Acceleration</h2>
+            <p class="card-desc">
+              A 5-part polyptych of hand-embroidered self-portraits exploring the tragic speed of modern time. As technical skill improves with age, the available time for slow, tactile craft diminishes under accumulating responsibilities—terminating in an abandoned hoop with a dangling red thread. An eloquent visual argument for intentional deceleration and slow technology.
+            </p>
+          </div>
+          <div class="card-tags">
+            <span class="tag">Tactile Deceleration</span>
+            <span class="tag">Fiber Craft</span>
+            <span class="tag">Analog Friction</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 3: NEGATIVE SPACE ERGONOMICS -->
+      <article class="card" data-category="spatial" onclick="openModal('negative-space')">
+        <div class="card-img-wrap">
+          <img src="images/arch_p1_crop_ergonomics_desk_knee.jpg" alt="Modeling Negative Space and Ergonomic Contours">
+        </div>
+        <div class="card-body">
+          <div>
+            <div class="card-meta-top">
+              <span class="card-category">Physical Prototyping & Ergonomics</span>
+              <span class="card-medium">Laminated Corrugated Cardboard</span>
+            </div>
+            <h2 class="card-title">Modeling Negative Space: Physical Ergonomics & The Void</h2>
+            <p class="card-desc">
+              A volumetric study carving negative space out of laminated industrial cardboard. Designed through on-site bodily interaction—docking precisely over a rigid desk edge while cradling the human knee. Investigates how raw, accessible materials can be modulated to create seamless transitions between architecture, product, and human posture.
+            </p>
+          </div>
+          <div class="card-tags">
+            <span class="tag">Ergonomic Form</span>
+            <span class="tag">Corrugated Cardboard</span>
+            <span class="tag">Industrial Prototyping</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 4: LARRY BELL PAVILION & TOPOGRAPHY -->
+      <article class="card" data-category="materiality" onclick="openModal('dual-pavilion')">
+        <div class="card-img-wrap">
+          <img src="images/arch_p3_crop_topographical_model_closeup.jpg" alt="Dual Pavilion and Topographical Landscape">
+        </div>
+        <div class="card-body">
+          <div>
+            <div class="card-meta-top">
+              <span class="card-category">Environmental Architecture</span>
+              <span class="card-medium">Cardboard Topography & Dowel Modeling</span>
+            </div>
+            <h2 class="card-title">Dual Pavilion: Light, Strata & Dichotomous Nature</h2>
+            <p class="card-desc">
+              A sensory exhibition pavilion designed specifically to house the vacuum-coated light-reactive glass sculptures of Larry Bell. Integrated into a stepped contour landscape, the architecture orchestrates natural daylight across dynamic geometric cantilevers, creating a deliberate sequence of contemplation between built envelope and botanical landscape.
+            </p>
+          </div>
+          <div class="card-tags">
+            <span class="tag">Calm Spaces</span>
+            <span class="tag">Topographical Strata</span>
+            <span class="tag">Natural Light Modulation</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 5: CURLEY'S TIME FREEZE -->
+      <article class="card" data-category="materiality" onclick="openModal('curleys-time-freeze')">
+        <div class="card-img-wrap">
+          <img src="images/curleys_time_freeze_cardboard_kinetic.jpg" alt="Curley's Time Freeze Kinetic Cardboard Study">
+        </div>
+        <div class="card-body">
+          <div>
+            <div class="card-meta-top">
+              <span class="card-category">Kinetic Mixed Media</span>
+              <span class="card-medium">Charcoal, Ink, Hot Glue & Cardboard (48x55)</span>
+            </div>
+            <h2 class="card-title">Curley’s Time Freeze: Kinetic Motion on Raw Strata</h2>
+            <p class="card-desc">
+              Drawing upon Eadweard Muybridge’s high-speed motion photography, this large-scale piece deconstructs a dancer’s leap across torn corrugated cardboard, ink washes, and physical fiber. It arrests time in a kinetic burst, celebrating the physical friction and rough texture of non-digital materials.
+            </p>
+          </div>
+          <div class="card-tags">
+            <span class="tag">Raw Materiality</span>
+            <span class="tag">Kinetic Study</span>
+            <span class="tag">Physical Substrate</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 6: MRS DALLOWAY SKELETON -->
+      <article class="card" data-category="craft" onclick="openModal('mrs-dalloway')">
+        <div class="card-img-wrap">
+          <img src="images/mrs_dalloway_skeleton_of_habit.jpg" alt="Mrs Dalloway's Skeleton of Habit">
+        </div>
+        <div class="card-body">
+          <div>
+            <div class="card-meta-top">
+              <span class="card-category">Fine Art & Philosophy of Habit</span>
+              <span class="card-medium">Oil Pastel on Paper (18x24)</span>
+            </div>
+            <h2 class="card-title">The Skeleton of Habit: Quantified Mornings</h2>
+            <p class="card-desc">
+              An inquiry into our daily relationship with timekeeping hardware. Depicting the waking ritual at a 6:00 AM digital alarm, the composition uses tactile pastels to contrast the fluid human dreamscape against the relentless cadence of modern digital devices.
+            </p>
+          </div>
+          <div class="card-tags">
+            <span class="tag">Habit & Ritual</span>
+            <span class="tag">Device Critique</span>
+            <span class="tag">Tactile Pastels</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 7: ABSENCE SURREALISM -->
+      <article class="card" data-category="materiality" onclick="openModal('absence')">
+        <div class="card-img-wrap">
+          <img src="images/absence_architectural_surrealism.jpg" alt="Absence Architectural Surrealism">
+        </div>
+        <div class="card-body">
+          <div>
+            <div class="card-meta-top">
+              <span class="card-category">Graphic Scenography & Spatial Form</span>
+              <span class="card-medium">Spray Paint, Stencils & Digital Refinement</span>
+            </div>
+            <h2 class="card-title">Absence: Architectural Geometry & Minimal Scenography</h2>
+            <p class="card-desc">
+              A minimalist architectural study constructed using hand-cut paper stencils and layered ultramarine spray paint. Exploring stealth, silence, and eavesdropping through arched voids, geometric stairs, and luminous spheres. A study in reductive visual systems and graphic atmosphere.
+            </p>
+          </div>
+          <div class="card-tags">
+            <span class="tag">Minimal Geometry</span>
+            <span class="tag">Stencil Craft</span>
+            <span class="tag">Spatial Atmosphere</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 8: RAMANUJAN REFLECTION -->
+      <article class="card" data-category="craft" onclick="openModal('ramanujan')">
+        <div class="card-img-wrap">
+          <img src="images/ramanujan_reflection_ink_mirror.jpg" alt="A. K. Ramanujan Reflection Pen and Ink">
+        </div>
+        <div class="card-body">
+          <div>
+            <div class="card-meta-top">
+              <span class="card-category">Precision Draftsmanship</span>
+              <span class="card-medium">Pen & Ink on Paper (14x17)</span>
+            </div>
+            <h2 class="card-title">The Mediated Observer: Optics & Self-Perception</h2>
+            <p class="card-desc">
+              Based on a photograph taken in the glass reflection of a refrigerator during travels in Japan, this intricate cross-hatched ink study investigates how optical tools and everyday surfaces mediate our sense of identity. Grounded in A. K. Ramanujan’s poetry on observing the stranger in shop windows.
+            </p>
+          </div>
+          <div class="card-tags">
+            <span class="tag">Optics & Glass</span>
+            <span class="tag">Ink Line-Weight</span>
+            <span class="tag">Mindful Observation</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 9: SYLVIA PLATH CELLOPHANE -->
+      <article class="card" data-category="craft" onclick="openModal('plath-cellophane')">
+        <div class="card-img-wrap">
+          <img src="images/sylvia_plath_cellophane_water.jpg" alt="Sylvia Plath's Cellophane Oil on Canvas">
+        </div>
+        <div class="card-body">
+          <div>
+            <div class="card-meta-top">
+              <span class="card-category">Fine Art / Painting</span>
+              <span class="card-medium">Oil on Canvas (18x24)</span>
+            </div>
+            <h2 class="card-title">Sensory Surface: Immersion & The Membrane</h2>
+            <p class="card-desc">
+              A painting balancing realism and liquid abstraction, capturing the sensory boundary between water and air. An exploration of immersion, sensory isolation, and the desire to break through modern numbing membranes to regain physical presence.
+            </p>
+          </div>
+          <div class="card-tags">
+            <span class="tag">Sensory Immersion</span>
+            <span class="tag">Fluid Abstraction</span>
+            <span class="tag">Oil Medium</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 10: ESTHER GREENWOOD FRIDGE -->
+      <article class="card" data-category="craft" onclick="openModal('esther-fridge')">
+        <div class="card-img-wrap">
+          <img src="images/esther_greenwood_fridge_fig_tree.jpg" alt="Esther Greenwood's Fridge Colored Pencil">
+        </div>
+        <div class="card-body">
+          <div>
+            <div class="card-meta-top">
+              <span class="card-category">Narrative Illustration</span>
+              <span class="card-medium">Colored Pencil on Paper</span>
+            </div>
+            <h2 class="card-title">Choice Paralysis & The Fig Tree: Modern Overload</h2>
+            <p class="card-desc">
+              An unconventional translation of Sylvia Plath’s fig tree parable, transposing existential branching choices into labeled bottles within a humming refrigerator. A hand hesitates at the threshold—a direct metaphor for the cognitive fatigue and infinite choice architecture of hyper-connected digital culture.
+            </p>
+          </div>
+          <div class="card-tags">
+            <span class="tag">Choice Architecture</span>
+            <span class="tag">Cognitive Fatigue</span>
+            <span class="tag">Attention & Focus</span>
+          </div>
+        </div>
+      </article>
+
+    </main>
+
+    <!-- Artist Statement & Philosophy Section -->
+    <section class="philosophy-section" id="philosophy">
+      <div class="philosophy-grid">
+        <div class="philosophy-sidebar">
+          <h3>Material Craft, Space & Technology</h3>
+          <p>
+            An approach bridging physical prototyping, calm technology, and quantitative problem solving.
+          </p>
+        </div>
+        <div class="philosophy-body">
+          <h4>1. Restoring Weight, Grain, and Tangible Presence</h4>
+          <p>
+            Much of contemporary technology draws attention into flat, frictionless glass screens. In contrast, calm technology and mindful hardware prioritize human presence, tangible feedback, and the physical world—the rhythm of a walk, the feel of natural materials, and the deliberate click of a physical button. My artistic practice is rooted in material honesty: tearing corrugated cardboard, pulling red embroidery thread through woven canvas, and feeling the drag of charcoal across heavy paper. I bring this tactile sensitivity to product storytelling, spatial environments, and creative technology.
+          </p>
+
+          <h4>2. Pedestrian Choreography & Behavioral Modeling</h4>
+          <p>
+            In <em>The Sidewalk Waltz</em>, I modeled an everyday encounter—a fast-walking student navigating around a crowd on a campus sidewalk—using calculus integration, differential vector slope fields, photographic stride collage, and an original choreographic score. This work demonstrates how our physical surroundings govern pacing, intimacy, and interaction. When we step away from screen-based distraction, we re-enter this physical choreography.
+          </p>
+          <p>
+            This practice bridges two complementary capabilities: creating hands-on, low-tech artwork that celebrates presence in the physical world, while applying the quantitative rigor needed for data analysis and operations—such as identifying bottlenecks, analyzing friction points, and optimizing flow under real-world constraints.
+          </p>
+
+          <h4>3. Habit, Time, and Intentional Living</h4>
+          <p>
+            Across my fine arts work—from the slow hand-embroidery of <em>Jo March’s Maturation</em> to the waking ritual in <em>The Skeleton of Habit</em>—I examine how daily tools and routines shape attention. Rather than treating art as merely decorative, I use it to explore what our tools ask of our focus and how intentional design can help us live more grounded lives.
+          </p>
+
+          <h4>4. Cross-Disciplinary Fluency</h4>
+          <p>
+            My work unites architectural drafting, physical model-making (scale sketch models and corrugated topography), mathematical modeling, printmaking, and fine arts. I speak the language of engineers and analysts while maintaining the intuitive, hands-on discernment of an artist.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-left">
+        <div class="footer-title">Jacqueline Adelmann</div>
+        <div class="footer-sub">Spatial Design · Creative Technology · Material Craft</div>
+      </div>
+      <div class="footer-links">
+        <a href="#philosophy" class="btn-ghost">Read Artist Statement</a>
+        <button class="btn-ghost" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Back to Top ↑</button>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Interactive Project Detail Modal -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
+    <div class="modal-content" id="modalContent">
+      <button class="modal-close" onclick="closeModal()" aria-label="Close modal">×</button>
+      
+      <div class="modal-media">
+        <div class="modal-media-header">
+          <div class="modal-media-caption" id="modalImgCaption">Project Overview</div>
+          <a id="modalImgFullLink" href="" target="_blank" rel="noopener noreferrer" class="modal-media-zoom-btn">⤢ Full Resolution</a>
+        </div>
+        <div class="modal-media-img-container">
+          <img id="modalImg" src="" alt="Project detail view">
+        </div>
+        <div class="modal-gallery-thumbs" id="modalThumbs"></div>
+      </div>
+
+      <div class="modal-text">
+        <div>
+          <div class="modal-meta" id="modalMeta">Spatial Interaction Design</div>
+          <h2 class="modal-title" id="modalTitle">Project Title</h2>
+        </div>
+
+        <div class="modal-spec-grid">
+          <div class="modal-spec-cell">
+            <span class="modal-spec-label">Medium</span>
+            <span class="modal-spec-val" id="modalMedium">Charcoal on Paper</span>
+          </div>
+          <div class="modal-spec-cell">
+            <span class="modal-spec-label">Scale / Dimensions</span>
+            <span class="modal-spec-val" id="modalDim">Variable</span>
+          </div>
+          <div class="modal-spec-cell">
+            <span class="modal-spec-label">Role Focus</span>
+            <span class="modal-spec-val" id="modalRelevance">Calm Tech / Spatial Interaction</span>
+          </div>
+          <div class="modal-spec-cell">
+            <span class="modal-spec-label">Inquiry Angle</span>
+            <span class="modal-spec-val" id="modalInquiry">Human Movement & Friction</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="modal-section-title">Conceptual Framework & Methodology</div>
+          <div class="modal-desc" id="modalConcept"></div>
+        </div>
+
+        <div>
+          <div class="modal-section-title">Relevance & Application</div>
+          <div class="modal-desc" id="modalWhy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Detailed project database
+    const projects = {
+      'sidewalk-waltz': {
+        title: "The Sidewalk Waltz: Choreographing Everyday Collision",
+        category: "Spatial Interaction Design & Behavioral Analytics",
+        medium: "3 Architectural Plates: Photographic stride collage, musical score, vector slope fields & calculus integration",
+        dimensions: "3-Plate Analytical Architecture Portfolio (2880 × 1620, Full Series)",
+        relevance: "Spatial Design · Low-Tech Art Creation · Data & Operations Modeling",
+        inquiry: "How built environments guide movement, friction, and collision dynamics",
+        concept: `Architecture often acts as an unwritten script guiding and limiting human movement. Conceived at Vassar College, this complete three-plate analytical study investigates a foundational architectural problem: how physical space predetermines interaction within its confines.
+<br><br>
+The study examines an empirical everyday friction: a fast-walking pedestrian encountering a slow-moving group of Vassar students heading down a narrow sidewalk toward the Deece (Gordon Commons dining hall). Because the sidewalk narrowly accommodates the group, the fast walker faces spatial constraints: do they slow down, comply, or adapt?
+<br><br>
+The project investigates and resolves this collision across three architectural plates:
+<br><br>
+• <strong>Plate 1 (Problem Formulation & Site Survey):</strong> Establishes the spatial inquiry and analyzes the physical site via an aerial campus walk-path survey.
+<br><br>
+• <strong>Plate 2 (Describing the Movement — The Analytical Triad):</strong> Synthesizes three rigorous lenses:
+  <br>&nbsp;&nbsp;<strong>(a) Photographic Stride Sequence:</strong> An analog contact strip capturing the walker stepping off the sidewalk onto the grass (adapting past the architectural constraint to maintain pace);
+  <br>&nbsp;&nbsp;<strong>(b) Vector Slope Field & Score:</strong> An original musical score (<em>Sidewalk Waltz</em>, composed by Jacqueline Adelmann) placed alongside a differential vector slope field modeling directional velocity and trajectory flow;
+  <br>&nbsp;&nbsp;<strong>(c) Quantitative Calculus Model:</strong> Quadratic trajectory modeling (<code>f(t) = -5/121(t-11)² + 5</code>) and a definite calculus integral calculating the exact <strong>73 ft² in-between buffer area</strong> created between the parties.
+<br><br>
+• <strong>Plate 3 (Composite Choreographic Duet):</strong> Translates the mathematical trajectory and musical score into an 8-step choreographed footstep duet between <em>person f</em> (fast walker) and <em>person s</em> (slow group) along the sidewalk edge—showing how everyday pedestrian friction can be understood as an embodied dance.`,
+        why: `This project connects creative and quantitative problem-solving across two complementary areas:
+<br><br>
+<strong>Low-Tech Art & Tangible Interaction:</strong><br>
+For teams focused on reducing screen dependency, this project explores what happens when people look up and re-engage with their physical surroundings. Using hands-on, analog media—darkroom-style photo contact strips, cut paper, hand-drawn vector diagrams, and an original musical score—it elevates ordinary pedestrian friction into an embodied dance.
+<br><br>
+<strong>Data Analysis & Operations Modeling:</strong><br>
+Beneath the artistic choreography lies structured quantitative problem solving. The project models a physical bottleneck using differential vector slope fields, parameterizes evasive trajectories through quadratic curve fitting, and solves a definite calculus integral to quantify the exact 73 ft² spatial capacity required to resolve the collision. This maps directly to diagnosing throughput constraints, queueing friction, and capacity planning in operational systems.`,
+        images: [
+          {
+            src: "images/arch_p2_sidewalk_waltz_featured_hero.jpg",
+            title: "Project Overview: 5-Phase Multi-Disciplinary Synthesis",
+            caption: "Aerial Site · Stride Collage · Sidewalk Waltz Score & Vectors · Calculus Integration (73 ft²) · Choreographic Duet"
+          },
+          {
+            src: "images/arch_p2_sidewalk_waltz_complete_triptych.jpg",
+            title: "Complete Architectural Triptych (All 3 Plates)",
+            caption: "Plates 1, 2, and 3 viewed side by side as presented in the Architecture Portfolio"
+          },
+          {
+            src: "images/arch_p2_page6_context_vassar_prompt.jpg",
+            title: "Plate 1: Problem Formulation & Aerial Site Survey",
+            caption: "Vassar College campus problem statement (Application 1.1.1), questions a, b, c, and aerial walk-path photo"
+          },
+          {
+            src: "images/arch_p2_page7_calculus_score_movement.jpg",
+            title: "Plate 2: Describing Movement — Analytical Triad",
+            caption: "(a) Photographic stride collage, (b) Sidewalk Waltz score & vector slope field, (c) Calculus integral solving 73 ft²"
+          },
+          {
+            src: "images/arch_p2_page8_composite_choreography.jpg",
+            title: "Plate 3: Composite Drawing — Footstep Duet",
+            caption: "Choreographed 8-step footstep duet between fast-walker (person f) and slow-walker (person s) along the sidewalk edge"
+          },
+          {
+            src: "images/arch_p2_crop_vassar_prompt_text.jpg",
+            title: "Plate 1 Detail: Problem Statement & Inquiry",
+            caption: "Architectural prescription hypothesis and formal analytical questions (a), (b), (c)"
+          },
+          {
+            src: "images/arch_p2_crop_vassar_aerial_site.jpg",
+            title: "Plate 1 Detail: Aerial Walk-Path Context",
+            caption: "Vassar College campus walk-path to the Deece (Gordon Commons dining hall)"
+          },
+          {
+            src: "images/arch_p2_crop_stride_photocollage.jpg",
+            title: "Plate 2 Detail: Contact Stride Photocollage",
+            caption: "Stride-by-stride sequence showing the pedestrian stepping onto the grass to bypass the group"
+          },
+          {
+            src: "images/arch_p2_crop_sidewalk_waltz_score.jpg",
+            title: "Plate 2 Detail: Sidewalk Waltz Score & Slope Fields",
+            caption: "Original musical notation score composed by Jacqueline Adelmann alongside vector slope field dynamics"
+          },
+          {
+            src: "images/arch_p2_crop_calculus_integral_model.jpg",
+            title: "Plate 2 Detail: Calculus Derivation & Graph",
+            caption: "Quadratic trajectory model f(t) and definite integral calculation solving for the 73 ft² in-between buffer area"
+          },
+          {
+            src: "images/arch_p2_crop_choreography_footsteps.jpg",
+            title: "Plate 3 Detail: Choreographic Duet Notation",
+            caption: "Footstep choreography between person f and person s: '...because a dance needs footwork'"
+          }
+        ]
+      },
+      'jo-march': {
+        title: "Jo March’s Maturation: The Cost of Acceleration",
+        category: "Fiber Art & Conceptual Craft",
+        medium: "Red thread hand-embroidered on canvas in wood frames, reclaimed timber mount",
+        dimensions: "Polyptych (5 frames mounted on wood plank)",
+        relevance: "Slow Craft · Material Resistance · Intentional Living",
+        inquiry: "The loss of slow, tactile presence under modern busyness",
+        concept: "Inspired by Little Women, this polyptych traces the passage of time through five embroidered self-portraits. Historically, embroidery was an exacting, slow art learned across years. Here, technical dexterity improves across the series, but as adulthood and external obligations amass, the available time for slow, quiet making diminishes. The final portrait is hastily sketched with thread and left deliberately incomplete, punctuated by a dangling, loose thread.",
+        why: "This piece explores what screen saturation and modern acceleration take from human life: the patience for slow, deliberate, tactile craft. For teams creating calm technology or products centered on focus, it serves as a visual exploration of intentional time and tactile making.",
+        images: [
+          "images/jo_march_embroidery_polyptych.jpg"
+        ]
+      },
+      'negative-space': {
+        title: "Modeling Negative Space: Physical Ergonomics & The Void",
+        category: "Physical Prototyping & Ergonomics",
+        medium: "Laminated corrugated cardboard, hand-carved negative space",
+        dimensions: "Modular volumetric study block",
+        relevance: "Physical Prototyping · Industrial Ergonomics · Form Studies",
+        inquiry: "How physical voids can dock with furniture and human anatomy",
+        concept: "An exploratory physical prototype constructed by layering and contour-slicing sheets of industrial corrugated cardboard. The carved void is tested through physical demonstrations: clamping over the edge of a flat desk, and contouring around the curve of a human knee in a seated posture. Cross-sectional studies reveal internal light channels and cavernous negative spaces.",
+        why: "Hardware design is fundamentally about how an object feels in the hand, how it rests in physical space, and how it respects the body. This project demonstrates physical prototyping fluency, understanding of negative space versus solid volume, and ergonomic sensitivity using humble, tactile materials.",
+        images: [
+          "images/arch_p1_crop_ergonomics_desk_knee.jpg",
+          "images/arch_p1_cardboard_negative_space_model.jpg",
+          "images/arch_p1_ergonomic_demonstration.jpg",
+          "images/arch_p1_model_inner_sections.jpg"
+        ]
+      },
+      'dual-pavilion': {
+        title: "Dual Pavilion: Light, Strata & Dichotomous Nature",
+        category: "Environmental Architecture & Exhibition Design",
+        medium: "Corrugated cardboard contour topography (1/16 in.), dowel structural model (1/8 in.), site sections",
+        dimensions: "1/8 in. & 1/16 in. scale physical models and architectural drafting",
+        relevance: "Spatial Design · Natural Light · Scale Architectural Modeling",
+        inquiry: "Orchestrating contemplative encounters between built structure and nature",
+        concept: "A synthesis of negative-space curves and pedestrian movement pathways, this exhibition pavilion is configured to house the vacuum-coated glass sculptures of artist Larry Bell. Because Bell’s iridescent metallic glass reacts dynamically to natural light, the pavilion utilizes raked cantilevers, geometric structural beams, and large apertures to orchestrate changing daylight throughout the day. It sits within a stepped cardboard contour landscape, accessed by a winding pedestrian approach.",
+        why: "Mindful hardware (such as reflective, non-emissive, or ambient displays) is deeply tied to natural light and existing harmoniously within physical spaces. This project displays physical architectural modeling, topographical contouring, and environmental light control.",
+        images: [
+          "images/arch_p3_crop_topographical_model_closeup.jpg",
+          "images/arch_p3_scale_sketch_model_pavilion.jpg",
+          "images/arch_p3_geometric_beams_structure.jpg",
+          "images/arch_p3_topographical_model_landscape.jpg",
+          "images/arch_p3_topographical_model_profile.jpg",
+          "images/arch_p3_final_space_floor_site_plan.jpg",
+          "images/arch_p3_larry_bell_light_exhibition_plan.jpg",
+          "images/arch_p3_circulation_botanical_moodboard.jpg"
+        ]
+      },
+      'curleys-time-freeze': {
+        title: "Curley’s Time Freeze: Kinetic Motion on Raw Strata",
+        category: "Kinetic Mixed Media",
+        medium: "Charcoal, ink wash, hot glue, acrylic paint, yarn on corrugated cardboard substrate",
+        dimensions: "48 x 55 inches",
+        relevance: "Tactile Substrates · Kinetic Studies · Mixed Media",
+        inquiry: "Arresting instantaneous human motion on deconstructed cardboard",
+        concept: "Combining Eadweard Muybridge’s pioneering chronophotography with Steinbeck’s prose from Of Mice and Men, this mixed-media work arrests the multi-stage trajectory of a dancer's leap. Executed on torn corrugated cardboard using industrial adhesives, charcoal, and yarn, the piece fuses rough material tactile friction with dynamic human kinetic energy.",
+        why: "Executed on raw corrugated cardboard using industrial adhesives, charcoal, and yarn, this piece shares the cardboard material language of architectural models. It reflects a dedication to physical texture, layered substrates, and capturing human motion without relying on digital screens.",
+        images: [
+          "images/curleys_time_freeze_cardboard_kinetic.jpg"
+        ]
+      },
+      'mrs-dalloway': {
+        title: "The Skeleton of Habit: Quantified Mornings",
+        category: "Fine Art & Philosophy of Habit",
+        medium: "Textured oil pastel on heavy paper",
+        dimensions: "18 x 24 inches",
+        relevance: "Habit & Routine · Material Texture · Morning Ritual",
+        inquiry: "How habitual action and hardware devices anchor human consciousness",
+        concept: "Drawing from Virginia Woolf’s reflection on how habit upholds daily human life, this artwork depicts the intimate threshold of awakening to a 6:00 AM alarm clock. Using textured oil pastels, the composition contrasts the dreaming subconscious with the unyielding temporal demand of a digital display.",
+        why: "The alarm clock is the original domestic time machine. For teams rethinking how people begin and end their days without notification bombardment, this artwork explores morning rituals, habit formation, and intentional living.",
+        images: [
+          "images/mrs_dalloway_skeleton_of_habit.jpg"
+        ]
+      },
+      'absence': {
+        title: "Absence: Architectural Geometry & Minimal Scenography",
+        category: "Graphic Scenography & Spatial Form",
+        medium: "Hand-constructed paper stencils, tape, layered spray paint & graphic refinement",
+        dimensions: "16 x 20 inches",
+        relevance: "Graphic Architecture · Minimalist Form · Composition",
+        inquiry: "Stealth, acoustic observation, and architectural suspense",
+        concept: "Constructed with physical paper stencils and layered ultramarine spray paint, this architectural scene features crisp arches, cascading staircases, glowing orbs, and silhouetted figures. Inspired by themes of quiet observation, the piece creates an atmosphere of silence, geometry, and spatial mystery.",
+        why: "Showcases graphic control, mastery of negative space, lighting, and a clean, reductive design language suited for physical products, packaging, and spatial branding.",
+        images: [
+          "images/absence_architectural_surrealism.jpg"
+        ]
+      },
+      'ramanujan': {
+        title: "The Mediated Observer: Optics & Self-Perception",
+        category: "Precision Draftsmanship",
+        medium: "Pen and ink cross-hatching on heavy paper",
+        dimensions: "14 x 17 inches",
+        relevance: "Precision Draftsmanship · Optics & Reflection",
+        inquiry: "Examining selfhood reflected through glass and mechanical lenses",
+        concept: "Grounded in poet A. K. Ramanujan’s Self Portrait, this intricate pen-and-ink study captures the artist reflected in the glass pane of a refrigerator in Japan, holding a camera lens. Every line is laid down with permanent ink, demanding complete focus and unforgiving intentionality.",
+        why: "Demonstrates disciplined line work, patience, and visual inquiry into how optical tools frame human perception—a meaningful theme when designing technology that steps back from self-curation and surveillance.",
+        images: [
+          "images/ramanujan_reflection_ink_mirror.jpg"
+        ]
+      },
+      'plath-cellophane': {
+        title: "Sensory Surface: Immersion & The Membrane",
+        category: "Fine Art / Painting",
+        medium: "Oil paint on canvas",
+        dimensions: "18 x 24 inches",
+        relevance: "Materiality · Sensory Immersion · Painting",
+        inquiry: "Floating vs sinking, sensory boundary between air and water",
+        concept: "A balance between liquid abstraction and portrait realism, this oil painting captures the sensation of being plunged underwater. Drawing from Sylvia Plath's Ariel, the work creates tension: physically sinking while abstractly weightless, isolated behind shimmering surface tension.",
+        why: "Explores the boundary between the sensory world and the numbing membrane that modern screen culture can impose. Demonstrates fine arts mastery in color, refraction, and paint handling.",
+        images: [
+          "images/sylvia_plath_cellophane_water.jpg"
+        ]
+      },
+      'esther-fridge': {
+        title: "Choice Paralysis & The Fig Tree: Modern Overload",
+        category: "Narrative Illustration",
+        medium: "Colored pencil on paper",
+        dimensions: "Standard paper",
+        relevance: "Choice Architecture · Cognitive Fatigue · Narrative Illustration",
+        inquiry: "Translating existential choice into contemporary refrigeration",
+        concept: "A modern reimagining of Sylvia Plath's fig tree metaphor from The Bell Jar, in which choosing a single future feels like picking one fig while watching others rot. In this drawing, the choices become glass bottles sitting inside a humming refrigerator, with handwritten labels. A hand reaches in, paralyzed by abundance.",
+        why: "Explores the cognitive fatigue of endless choices—the anxiety of infinite scrolling and too many open options that mindful hardware seeks to resolve. A thoughtful visual inquiry into focus and decision fatigue.",
+        images: [
+          "images/esther_greenwood_fridge_fig_tree.jpg"
+        ]
+      }
+    };
+
+    // Filter logic
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.card');
+    const counterText = document.getElementById('counterText');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+
+        let visibleCount = 0;
+        cards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = card.classList.contains('featured') && window.innerWidth > 900 ? 'grid' : 'flex';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        counterText.textContent = `Showing ${visibleCount} of ${cards.length} works`;
+      });
+    });
+
+    // Modal logic
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalImg = document.getElementById('modalImg');
+    const modalThumbs = document.getElementById('modalThumbs');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalMeta = document.getElementById('modalMeta');
+    const modalMedium = document.getElementById('modalMedium');
+    const modalDim = document.getElementById('modalDim');
+    const modalRelevance = document.getElementById('modalRelevance');
+    const modalInquiry = document.getElementById('modalInquiry');
+    const modalConcept = document.getElementById('modalConcept');
+    const modalWhy = document.getElementById('modalWhy');
+    const modalImgCaption = document.getElementById('modalImgCaption');
+    const modalImgFullLink = document.getElementById('modalImgFullLink');
+
+    let currentProjectImages = [];
+    let currentImageIndex = 0;
+
+    function openModal(id) {
+      const data = projects[id];
+      if (!data) return;
+
+      modalTitle.textContent = data.title;
+      modalMeta.textContent = data.category;
+      modalMedium.textContent = data.medium;
+      modalDim.textContent = data.dimensions;
+      modalRelevance.textContent = data.relevance;
+      modalInquiry.textContent = data.inquiry;
+      modalConcept.innerHTML = data.concept;
+      modalWhy.innerHTML = data.why;
+
+      // Normalize images array (can contain strings or {src, title, caption} objects)
+      currentProjectImages = data.images.map((img, i) => {
+        if (typeof img === 'string') {
+          return { src: img, title: `${data.title} (Plate ${i + 1})`, caption: '' };
+        }
+        return img;
+      });
+      currentImageIndex = 0;
+
+      function updateActiveImage(idx) {
+        currentImageIndex = idx;
+        const item = currentProjectImages[idx];
+        modalImg.src = item.src;
+        if (modalImgCaption) {
+          modalImgCaption.textContent = item.title || `Plate ${idx + 1} of ${currentProjectImages.length}`;
+          modalImgCaption.title = item.caption || item.title || '';
+        }
+        if (modalImgFullLink) {
+          modalImgFullLink.href = item.src;
+        }
+        const thumbButtons = modalThumbs.querySelectorAll('.thumb-btn');
+        thumbButtons.forEach((b, i) => {
+          b.classList.toggle('active', i === idx);
+        });
+      }
+
+      // Populate thumbs if multiple
+      modalThumbs.innerHTML = '';
+      if (currentProjectImages.length > 1) {
+        modalThumbs.style.display = 'flex';
+        currentProjectImages.forEach((item, idx) => {
+          const btn = document.createElement('button');
+          btn.className = `thumb-btn ${idx === 0 ? 'active' : ''}`;
+          btn.title = item.title || `View image ${idx + 1}`;
+          btn.setAttribute('aria-label', item.title || `View image ${idx + 1}`);
+          btn.innerHTML = `<img src="${item.src}" alt="${item.title || 'thumb'}">`;
+          btn.onclick = () => {
+            updateActiveImage(idx);
+          };
+          modalThumbs.appendChild(btn);
+        });
+      } else {
+        modalThumbs.style.display = 'none';
+      }
+
+      updateActiveImage(0);
+
+      // Reset scroll positions so the modal always starts from the top
+      modalOverlay.scrollTop = 0;
+      const mediaEl = document.querySelector('.modal-media');
+      const textEl = document.querySelector('.modal-text');
+      if (mediaEl) mediaEl.scrollTop = 0;
+      if (textEl) textEl.scrollTop = 0;
+
+      modalOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modalOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    }
+
+    function closeModalOnOverlay(e) {
+      if (e.target === modalOverlay) {
+        closeModal();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!modalOverlay.classList.contains('active')) return;
+
+      if (e.key === 'Escape') {
+        closeModal();
+      } else if (e.key === 'ArrowRight' && currentProjectImages.length > 1) {
+        const nextIdx = (currentImageIndex + 1) % currentProjectImages.length;
+        const allThumbs = modalThumbs.querySelectorAll('.thumb-btn');
+        if (allThumbs[nextIdx]) {
+          allThumbs[nextIdx].click();
+          allThumbs[nextIdx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+        }
+      } else if (e.key === 'ArrowLeft' && currentProjectImages.length > 1) {
+        const prevIdx = (currentImageIndex - 1 + currentProjectImages.length) % currentProjectImages.length;
+        const allThumbs = modalThumbs.querySelectorAll('.thumb-btn');
+        if (allThumbs[prevIdx]) {
+          allThumbs[prevIdx].click();
+          allThumbs[prevIdx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+        }
+      }
+    });
+
+    // Theme toggle
+    const themeBtn = document.getElementById('themeBtn');
+    let isDark = false;
+    themeBtn.addEventListener('click', () => {
+      isDark = !isDark;
+      document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      themeBtn.textContent = isDark ? '☀ Light' : '◐ Mode';
+    });
+  </script>
+</body>
+</html>
