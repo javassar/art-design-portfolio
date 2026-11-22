@@ -403,6 +403,7 @@
       max-height: 88vh;
       display: grid;
       grid-template-columns: 1.32fr 1fr;
+      grid-template-rows: 1fr;
       overflow: hidden;
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
       position: relative;
@@ -416,6 +417,8 @@
     }
 
     .modal-media {
+      grid-column: 1;
+      grid-row: 1;
       background-color: #FFFFFF;
       display: flex;
       flex-direction: column;
@@ -534,6 +537,8 @@
     }
 
     .modal-text {
+      grid-column: 2;
+      grid-row: 1;
       padding: 36px 36px 48px 36px;
       overflow-y: auto;
       overflow-x: hidden;
@@ -579,27 +584,28 @@
     }
 
     .modal-close {
-      position: absolute;
+      position: absolute !important;
       top: 16px;
       right: 16px;
       background: var(--bg);
       border: 1px solid var(--border);
       color: var(--text-main);
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       cursor: pointer;
-      z-index: 10;
+      z-index: 100;
       transition: var(--transition);
     }
 
     .modal-close:hover {
       background-color: var(--tag-bg);
-      transform: scale(1.05);
+      border-color: var(--border-dark);
+      transform: scale(1.08);
     }
 
     .modal-meta {
@@ -827,6 +833,8 @@
         margin: 16px auto;
       }
       .modal-media {
+        grid-column: auto;
+        grid-row: auto;
         height: auto;
         max-height: none;
         min-height: auto;
@@ -839,6 +847,8 @@
         max-height: 52vh;
       }
       .modal-text {
+        grid-column: auto;
+        grid-row: auto;
         height: auto;
         max-height: none;
         min-height: auto;
@@ -862,11 +872,405 @@
         margin: 16px auto;
       }
     }
+
+    /* ==========================================================================
+       PREMIUM ENHANCEMENTS: MAGNETIC BUTTONS, CHIC TRANSITIONS & EASTER EGGS
+       ========================================================================== */
+
+    /* 1. Hairline Page Progress Loader */
+    .chic-page-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--text-main), var(--text-muted));
+      z-index: 99999;
+      pointer-events: none;
+      transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+    }
+    .chic-page-loader.loaded {
+      width: 100%;
+      opacity: 0;
+    }
+
+    /* 2. Magnetic Elements Base Styling */
+    .btn-ghost, .theme-toggle, .filter-btn, .modal-media-zoom-btn, .thumb-btn, .interactive-waltz-pill, .cmd-k-btn {
+      position: relative;
+      will-change: transform;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+    }
+
+    .magnetic-inner {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      pointer-events: none;
+      will-change: transform;
+      transition: transform 0.15s ease-out;
+    }
+
+    /* 3. Custom Precision & Magnetic Cursor (Fine Pointer Desktop Only) */
+    @media (hover: hover) and (pointer: fine) {
+      .custom-cursor-dot {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 5px;
+        background-color: var(--text-main);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 10000;
+        transform: translate(-50%, -50%);
+        transition: opacity 0.2s ease, transform 0.1s ease;
+        opacity: 0;
+      }
+
+      .custom-cursor-ring {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 32px;
+        height: 32px;
+        border: 1px solid var(--text-main);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                    height 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                    background-color 0.3s ease, 
+                    border-color 0.3s ease, 
+                    opacity 0.2s ease;
+        opacity: 0;
+      }
+
+      .custom-cursor-ring.active {
+        width: 52px;
+        height: 52px;
+        border-color: var(--text-muted);
+        background-color: rgba(44, 53, 49, 0.05);
+        backdrop-filter: blur(1px);
+      }
+
+      [data-theme="dark"] .custom-cursor-ring.active {
+        background-color: rgba(229, 226, 218, 0.08);
+      }
+
+      .custom-cursor-ring.clicking {
+        transform: translate(-50%, -50%) scale(0.8);
+      }
+
+      .custom-cursor-ring.visible,
+      .custom-cursor-dot.visible {
+        opacity: 0.75;
+      }
+    }
+
+    /* 4. Chic Page & Card Transitions */
+    .page-enter-reveal {
+      animation: chicFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes chicFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card {
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), 
+                  box-shadow 0.3s ease, 
+                  border-color 0.3s ease;
+    }
+
+    .card.filtering-out {
+      opacity: 0;
+      transform: scale(0.96) translateY(6px);
+      pointer-events: none;
+    }
+
+    .card.filtering-in {
+      animation: cardEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes cardEnter {
+      from {
+        opacity: 0;
+        transform: scale(0.97) translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    /* Image crossfade in modal */
+    #modalImg {
+      transition: opacity 0.22s ease-in-out, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #modalImg.fade-out {
+      opacity: 0.15;
+      transform: scale(0.985);
+    }
+
+    /* 6. EASTER EGG 2: The Sidewalk Waltz Interactive Canvas Overlay */
+    .waltz-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(249, 248, 245, 0.95);
+      backdrop-filter: blur(12px);
+      z-index: 10005;
+      display: none;
+      flex-direction: column;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    [data-theme="dark"] .waltz-overlay {
+      background: rgba(20, 20, 19, 0.95);
+    }
+    
+    .waltz-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .waltz-hud-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 32px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+      z-index: 2;
+    }
+    .waltz-hud-title {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 300;
+      color: var(--text-main);
+    }
+    .waltz-hud-stats {
+      display: flex;
+      gap: 20px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .waltz-hud-stats span strong {
+      color: var(--text-main);
+    }
+    .waltz-canvas-container {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      cursor: crosshair;
+    }
+    #waltzCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .waltz-hud-bottom {
+      padding: 14px 32px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: var(--text-light);
+      flex-shrink: 0;
+      z-index: 2;
+    }
+    .interactive-waltz-pill {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 3px 9px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: var(--transition);
+      margin-left: 8px;
+    }
+    .interactive-waltz-pill:hover {
+      background-color: var(--text-main);
+      color: var(--bg);
+      border-color: var(--text-main);
+    }
+
+    /* 7. EASTER EGG 3: Command Palette (⌘K) */
+    .cmd-k-btn {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+    }
+    .cmd-k-btn kbd {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-size: 0.68rem;
+      color: var(--text-muted);
+    }
+
+    .cmd-palette-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(18, 18, 18, 0.65);
+      backdrop-filter: blur(8px);
+      z-index: 10010;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 14vh;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .cmd-palette-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+    .cmd-palette-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      width: 100%;
+      max-width: 620px;
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      animation: cmdSlide 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes cmdSlide {
+      from { transform: translateY(-16px) scale(0.98); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+    .cmd-search-wrap {
+      display: flex;
+      align-items: center;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      gap: 12px;
+    }
+    .cmd-search-icon {
+      font-family: var(--font-mono);
+      color: var(--text-light);
+      font-size: 0.95rem;
+    }
+    .cmd-input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      color: var(--text-main);
+      width: 100%;
+    }
+    .cmd-input::placeholder {
+      color: var(--text-light);
+      font-weight: 300;
+    }
+    .cmd-list {
+      max-height: 380px;
+      overflow-y: auto;
+      padding: 8px 0;
+      list-style: none;
+    }
+    .cmd-group-title {
+      padding: 8px 20px 4px 20px;
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-light);
+    }
+    .cmd-item {
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 0.88rem;
+      color: var(--text-main);
+      transition: background-color 0.15s ease;
+    }
+    .cmd-item.selected, .cmd-item:hover {
+      background-color: var(--tag-bg);
+    }
+    .cmd-item-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .cmd-item-badge {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-light);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+    }
+    .cmd-footer {
+      padding: 10px 20px;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-light);
+    }
+
+    /* Footer hints */
+    .footer-hints {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-light);
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .footer-hints kbd {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      padding: 1px 5px;
+      border-radius: 3px;
+      color: var(--text-main);
+    }
+
   </style>
 </head>
 <body>
+  <!-- Hairline Page Progress Indicator -->
+  <div class="chic-page-loader" id="pageLoader"></div>
 
-  <div class="container">
+  <!-- Precision Custom Cursor (Desktop Fine Pointer Only) -->
+  <div class="custom-cursor-dot" id="cursorDot"></div>
+  <div class="custom-cursor-ring" id="cursorRing"></div>
+
+
+  <div class="container page-enter-reveal">
     <!-- Header -->
     <header>
       <div class="header-top">
@@ -875,9 +1279,10 @@
           <div class="brand-subtitle">Spatial Design · Materiality · Creative Technology & Quantitative Modeling</div>
         </div>
         <div class="nav-actions">
-          <a href="#philosophy" class="btn-ghost">Artist Statement</a>
-          <button class="btn-ghost" onclick="window.print()">Print / Export PDF</button>
-          <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme">◐ Mode</button>
+          <a href="#philosophy" class="btn-ghost"><span class="magnetic-inner">Artist Statement</span></a>
+          <button class="btn-ghost" onclick="window.print()"><span class="magnetic-inner">Print / PDF</span></button>
+          <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme"><span class="magnetic-inner">◐ Mode</span></button>
+          <button class="btn-ghost cmd-k-btn" id="cmdKBtn" title="Search Works & Command Palette (⌘K)"><span class="magnetic-inner">Search <kbd>⌘K</kbd></span></button>
         </div>
       </div>
     </header>
@@ -927,8 +1332,11 @@
         <div class="card-body">
           <div>
             <div class="card-meta-top">
-              <span class="card-category">Spatial Interaction Design & Behavioral Analytics</span>
-              <span class="card-medium">3 Architectural Plates: Photocollage, Vector Calculus & Choreographic Notation</span>
+              <div>
+                <span class="card-category">Spatial Interaction Design & Behavioral Analytics</span>
+                <button class="interactive-waltz-pill" onclick="event.stopPropagation(); openWaltzCanvas();" title="Launch Interactive Choreographic Canvas (Shortcut: W)"><span class="magnetic-inner"><span>♫</span> Interactive Canvas</span></button>
+              </div>
+              <span class="card-medium">3 Architectural Plates · Vector Calculus & Choreography</span>
             </div>
             <h2 class="card-title">The Sidewalk Waltz: Choreographing Everyday Collision</h2>
             <p class="card-desc">
@@ -1206,6 +1614,12 @@
       <div class="footer-left">
         <div class="footer-title">Jacqueline Adelmann</div>
         <div class="footer-sub">Spatial Design · Creative Technology · Material Craft</div>
+        <div class="footer-hints">
+          <span>Shortcuts:</span>
+          <span><kbd>⌘K</kbd> Search & Palette</span>
+          <span><kbd>W</kbd> Sidewalk Waltz Canvas</span>
+          <span><kbd>Esc</kbd> Close Overlay</span>
+        </div>
       </div>
       <div class="footer-links">
         <a href="#philosophy" class="btn-ghost">Read Artist Statement</a>
@@ -1267,6 +1681,47 @@
       </div>
     </div>
   </div>
+
+  <!-- EASTER EGG: The Sidewalk Waltz Interactive Generative Canvas -->
+  <div class="waltz-overlay" id="waltzOverlay">
+    <div class="waltz-hud-top">
+      <div>
+        <div class="waltz-hud-title">The Sidewalk Waltz: Real-Time Pedestrian Choreography</div>
+        <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-light); margin-top: 4px;">
+          Interactive spatial modeling of avoidance trajectories & definite integral capacity buffer (73 ft²)
+        </div>
+      </div>
+      <div class="waltz-hud-stats">
+        <span>BUFFER AREA: <strong id="waltzIntegralStat">73.0 ft²</strong></span>
+        <span>VELOCITY: <strong id="waltzVelocityStat">1.42 m/s</strong></span>
+        <span>TRAJECTORY: <strong id="waltzCollisionStat">Avoidance Arc Active</strong></span>
+        <button class="btn-ghost" onclick="closeWaltzCanvas()" style="padding: 6px 14px;"><span class="magnetic-inner">✕ Exit Waltz [Esc]</span></button>
+      </div>
+    </div>
+    <div class="waltz-canvas-container" id="waltzContainer">
+      <canvas id="waltzCanvas"></canvas>
+    </div>
+    <div class="waltz-hud-bottom">
+      <div>Move cursor across canvas to choreograph footstep path · Click to place anchor node</div>
+      <div>Campus Site: Vassar College Dining Walk-Path · Reference: Architectural Plate 2</div>
+    </div>
+  </div>
+
+  <!-- Command Palette (⌘K) -->
+  <div class="cmd-palette-overlay" id="cmdPaletteOverlay" onclick="closeCmdPaletteOnOverlay(event)">
+    <div class="cmd-palette-box" id="cmdPaletteBox">
+      <div class="cmd-search-wrap">
+        <span class="cmd-search-icon">⌘</span>
+        <input type="text" class="cmd-input" id="cmdInput" placeholder="Search 10 curated works, themes, or actions..." autocomplete="off" spellcheck="false">
+      </div>
+      <ul class="cmd-list" id="cmdList"></ul>
+      <div class="cmd-footer">
+        <span>Navigation: <kbd>↑</kbd> <kbd>↓</kbd> to navigate · <kbd>↵</kbd> to select</span>
+        <span><kbd>Esc</kbd> to close</span>
+      </div>
+    </div>
+  </div>
+
 
   <script>
     // Detailed project database
@@ -1635,6 +2090,629 @@ Beneath the artistic choreography lies structured quantitative problem solving. 
       }
     });
 
+
+    /* ==========================================================================
+       INTERACTIVITY & EASTER EGG SCRIPTS
+       ========================================================================== */
+
+    // 1. Page Progress Loader
+    window.addEventListener('load', () => {
+      const loader = document.getElementById('pageLoader');
+      if (loader) {
+        loader.style.width = '100%';
+        setTimeout(() => loader.classList.add('loaded'), 300);
+      }
+    });
+
+    // 2. Magnetic Buttons & Elements (Excluding modal-close to protect spatial layout)
+    function initMagneticElements() {
+      if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const targets = document.querySelectorAll(
+        '.btn-ghost, .theme-toggle, .filter-btn, .modal-media-zoom-btn, .thumb-btn, .interactive-waltz-pill, .cmd-k-btn'
+      );
+
+      targets.forEach(el => {
+        let rect = null;
+
+        el.addEventListener('mouseenter', () => {
+          rect = el.getBoundingClientRect();
+          el.style.transition = 'none';
+        });
+
+        el.addEventListener('mousemove', (e) => {
+          if (!rect) rect = el.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          const deltaX = e.clientX - centerX;
+          const deltaY = e.clientY - centerY;
+          const strength = 0.32;
+          const tx = deltaX * strength;
+          const ty = deltaY * strength;
+
+          el.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
+
+          const inner = el.querySelector('.magnetic-inner');
+          if (inner) {
+            inner.style.transform = `translate3d(${tx * 0.28}px, ${ty * 0.28}px, 0)`;
+          }
+        });
+
+        el.addEventListener('mouseleave', () => {
+          rect = null;
+          el.style.transition = 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)';
+          el.style.transform = 'translate3d(0, 0, 0)';
+
+          const inner = el.querySelector('.magnetic-inner');
+          if (inner) {
+            inner.style.transition = 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)';
+            inner.style.transform = 'translate3d(0, 0, 0)';
+          }
+        });
+      });
+    }
+
+    // 3. Custom Precision & Magnetic Cursor
+    let cursorRingEl = null;
+    let cursorDotEl = null;
+
+    function initCustomCursor() {
+      if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      cursorDotEl = document.getElementById('cursorDot');
+      cursorRingEl = document.getElementById('cursorRing');
+      if (!cursorDotEl || !cursorRingEl) return;
+
+      let mouseX = -100, mouseY = -100;
+      let ringX = -100, ringY = -100;
+      let isVisible = false;
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        if (!isVisible) {
+          isVisible = true;
+          cursorDotEl.classList.add('visible');
+          cursorRingEl.classList.add('visible');
+        }
+        cursorDotEl.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+      });
+
+      window.addEventListener('mouseleave', () => {
+        isVisible = false;
+        cursorDotEl.classList.remove('visible');
+        cursorRingEl.classList.remove('visible');
+      });
+
+      window.addEventListener('mousedown', () => cursorRingEl.classList.add('clicking'));
+      window.addEventListener('mouseup', () => cursorRingEl.classList.remove('clicking'));
+
+      // Attach hover expansion to clickable elements
+      const hoverTargets = document.querySelectorAll('button, a, .card, .thumb-btn, input');
+      hoverTargets.forEach(el => {
+        el.addEventListener('mouseenter', () => cursorRingEl && cursorRingEl.classList.add('active'));
+        el.addEventListener('mouseleave', () => cursorRingEl && cursorRingEl.classList.remove('active'));
+      });
+
+      function renderCursor() {
+        ringX += (mouseX - ringX) * 0.18;
+        ringY += (mouseY - ringY) * 0.18;
+        cursorRingEl.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+        requestAnimationFrame(renderCursor);
+      }
+      requestAnimationFrame(renderCursor);
+    }
+
+    // 4. Subtle 3D Card Hover Tilt
+    function initCardTilt() {
+      if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const cx = rect.width / 2;
+          const cy = rect.height / 2;
+          const rx = ((y - cy) / cy) * -2.5;
+          const ry = ((x - cx) / cx) * 2.5;
+          card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+        });
+      });
+    }
+
+    // 5. Chic Card Filtering with Staggered Transition
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.card');
+    const projectCounter = document.getElementById('counterText');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+
+        let visibleCount = 0;
+        projectCards.forEach(card => {
+          const match = (filter === 'all' || card.dataset.category === filter);
+          if (match) {
+            visibleCount++;
+            card.classList.remove('filtering-out');
+            card.style.display = card.classList.contains('featured') && window.innerWidth > 900 ? 'grid' : 'flex';
+            card.classList.add('filtering-in');
+          } else {
+            card.classList.remove('filtering-in');
+            card.classList.add('filtering-out');
+            setTimeout(() => {
+              if (card.classList.contains('filtering-out')) {
+                card.style.display = 'none';
+              }
+            }, 250);
+          }
+        });
+
+        if (projectCounter) {
+          projectCounter.textContent = `Showing ${visibleCount} of ${projectCards.length} curated works`;
+        }
+      });
+    });
+
+    // 6. EASTER EGG: The Sidewalk Waltz Generative Canvas
+    const waltzOverlay = document.getElementById('waltzOverlay');
+    const waltzCanvas = document.getElementById('waltzCanvas');
+    let waltzCtx = null;
+    let waltzAnimFrame = null;
+    let waltzRunning = false;
+    let waltzPoints = [];
+    let footstepSequence = [];
+    let autonomousPedestrian = { x: 0, y: 0, angle: 0, speed: 1.6 };
+
+    function openWaltzCanvas() {
+      if (!waltzOverlay || !waltzCanvas) return;
+      waltzOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      waltzRunning = true;
+      waltzCtx = waltzCanvas.getContext('2d');
+
+      function resize() {
+        waltzCanvas.width = waltzCanvas.parentElement.clientWidth;
+        waltzCanvas.height = waltzCanvas.parentElement.clientHeight;
+        autonomousPedestrian.x = 80;
+        autonomousPedestrian.y = waltzCanvas.height * 0.45;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      waltzPoints = [];
+      footstepSequence = [];
+      autonomousPedestrian = { x: 80, y: waltzCanvas.height * 0.45, angle: 0.05, speed: 1.5 };
+
+      runWaltzLoop();
+    }
+
+    function closeWaltzCanvas() {
+      if (!waltzOverlay) return;
+      waltzOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+      waltzRunning = false;
+      if (waltzAnimFrame) cancelAnimationFrame(waltzAnimFrame);
+    }
+
+    let waltzMouse = { x: -100, y: -100, prevX: -100, prevY: -100, isMoving: false };
+    let lastStrideDist = 0;
+    let strideIndex = 0;
+
+    if (waltzCanvas) {
+      waltzCanvas.addEventListener('mousemove', (e) => {
+        const rect = waltzCanvas.getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        const my = e.clientY - rect.top;
+        waltzMouse.prevX = waltzMouse.x;
+        waltzMouse.prevY = waltzMouse.y;
+        waltzMouse.x = mx;
+        waltzMouse.y = my;
+        waltzMouse.isMoving = true;
+
+        waltzPoints.push({ x: mx, y: my, time: Date.now() });
+        if (waltzPoints.length > 70) waltzPoints.shift();
+
+        // Stride detector for footstep generation
+        if (waltzMouse.prevX > 0) {
+          const dx = mx - waltzMouse.prevX;
+          const dy = my - waltzMouse.prevY;
+          const dist = Math.hypot(dx, dy);
+          lastStrideDist += dist;
+
+          if (lastStrideDist > 34) {
+            lastStrideDist = 0;
+            const angle = Math.atan2(dy, dx);
+            const isLeft = (strideIndex % 2 === 0);
+            const footOffset = isLeft ? -9 : 9;
+            const px = mx + Math.cos(angle + Math.PI / 2) * footOffset;
+            const py = my + Math.sin(angle + Math.PI / 2) * footOffset;
+            footstepSequence.push({
+              x: px,
+              y: py,
+              angle: angle,
+              isLeft: isLeft,
+              stepNum: strideIndex + 1,
+              alpha: 1.0,
+              created: Date.now()
+            });
+            strideIndex++;
+            if (footstepSequence.length > 24) footstepSequence.shift();
+          }
+        }
+      });
+
+      waltzCanvas.addEventListener('click', (e) => {
+        const rect = waltzCanvas.getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        const my = e.clientY - rect.top;
+        // Ripple / chord anchor
+        footstepSequence.push({
+          x: mx,
+          y: my,
+          angle: 0,
+          isAnchor: true,
+          alpha: 1.0,
+          radius: 6,
+          created: Date.now()
+        });
+      });
+    }
+
+    function runWaltzLoop() {
+      if (!waltzRunning || !waltzCtx) return;
+      const w = waltzCanvas.width;
+      const h = waltzCanvas.height;
+
+      waltzCtx.clearRect(0, 0, w, h);
+
+      // Draw subtle campus architectural grid
+      waltzCtx.strokeStyle = document.body.getAttribute('data-theme') === 'dark' ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)';
+      waltzCtx.lineWidth = 1;
+      const gridSize = 40;
+      for (let x = 0; x < w; x += gridSize) {
+        waltzCtx.beginPath();
+        waltzCtx.moveTo(x, 0);
+        waltzCtx.lineTo(x, h);
+        waltzCtx.stroke();
+      }
+      for (let y = 0; y < h; y += gridSize) {
+        waltzCtx.beginPath();
+        waltzCtx.moveTo(0, y);
+        waltzCtx.lineTo(w, y);
+        waltzCtx.stroke();
+      }
+
+      // 1. Move autonomous pedestrian group (Person S) along campus sidewalk
+      autonomousPedestrian.x += autonomousPedestrian.speed;
+      autonomousPedestrian.y += Math.sin(autonomousPedestrian.x * 0.015) * 0.8;
+      if (autonomousPedestrian.x > w + 60) {
+        autonomousPedestrian.x = -40;
+        autonomousPedestrian.y = h * (0.35 + Math.random() * 0.3);
+      }
+
+      // Draw sidewalk corridor bounds
+      waltzCtx.strokeStyle = 'rgba(142, 139, 130, 0.25)';
+      waltzCtx.lineWidth = 1.5;
+      waltzCtx.setLineDash([6, 6]);
+      waltzCtx.beginPath();
+      waltzCtx.moveTo(0, h * 0.35);
+      waltzCtx.lineTo(w, h * 0.35);
+      waltzCtx.moveTo(0, h * 0.65);
+      waltzCtx.lineTo(w, h * 0.65);
+      waltzCtx.stroke();
+      waltzCtx.setLineDash([]);
+
+      // Draw Person S (Group)
+      waltzCtx.fillStyle = 'rgba(102, 100, 94, 0.45)';
+      waltzCtx.beginPath();
+      waltzCtx.arc(autonomousPedestrian.x, autonomousPedestrian.y, 14, 0, Math.PI * 2);
+      waltzCtx.fill();
+      waltzCtx.font = "10px 'JetBrains Mono', monospace";
+      waltzCtx.fillStyle = 'rgba(102, 100, 94, 0.8)';
+      waltzCtx.fillText("Person S (Group)", autonomousPedestrian.x - 38, autonomousPedestrian.y - 20);
+
+      // 2. Calculus In-Between Buffer Area Shading (73 ft² definite integral)
+      if (waltzPoints.length > 2) {
+        const lastP = waltzPoints[waltzPoints.length - 1];
+        const distToGroup = Math.hypot(lastP.x - autonomousPedestrian.x, lastP.y - autonomousPedestrian.y);
+        
+        // Definite integral area ribbon connecting user path and group path
+        waltzCtx.fillStyle = 'rgba(44, 53, 49, 0.08)';
+        if (document.body.getAttribute('data-theme') === 'dark') {
+          waltzCtx.fillStyle = 'rgba(229, 226, 218, 0.08)';
+        }
+        waltzCtx.beginPath();
+        waltzCtx.moveTo(autonomousPedestrian.x, autonomousPedestrian.y);
+        waltzPoints.slice(-15).forEach(pt => waltzCtx.lineTo(pt.x, pt.y));
+        waltzCtx.closePath();
+        waltzCtx.fill();
+
+        // Update HUD live metrics
+        const integralEl = document.getElementById('waltzIntegralStat');
+        const velocityEl = document.getElementById('waltzVelocityStat');
+        const collisionEl = document.getElementById('waltzCollisionStat');
+        if (integralEl) {
+          const dynamicArea = Math.min(110, Math.max(45, (distToGroup * 0.42))).toFixed(1);
+          integralEl.textContent = `${dynamicArea} ft²`;
+        }
+        if (velocityEl) {
+          velocityEl.textContent = `${(1.2 + Math.sin(Date.now() * 0.003) * 0.25).toFixed(2)} m/s`;
+        }
+        if (collisionEl) {
+          collisionEl.textContent = distToGroup > 90 ? "Avoidance Trajectory Clear" : "Close Proximity Duet Active";
+        }
+      }
+
+      // 3. User Trajectory Arc (Person F)
+      if (waltzPoints.length > 1) {
+        waltzCtx.strokeStyle = document.body.getAttribute('data-theme') === 'dark' ? '#ECEBE8' : '#18181A';
+        waltzCtx.lineWidth = 2.2;
+        waltzCtx.beginPath();
+        waltzCtx.moveTo(waltzPoints[0].x, waltzPoints[0].y);
+        for (let i = 1; i < waltzPoints.length; i++) {
+          const xc = (waltzPoints[i].x + waltzPoints[i - 1].x) / 2;
+          const yc = (waltzPoints[i].y + waltzPoints[i - 1].y) / 2;
+          waltzCtx.quadraticCurveTo(waltzPoints[i - 1].x, waltzPoints[i - 1].y, xc, yc);
+        }
+        waltzCtx.stroke();
+      }
+
+      // 4. Render Footsteps (The 8-step Waltz Duet)
+      footstepSequence.forEach(step => {
+        waltzCtx.save();
+        waltzCtx.translate(step.x, step.y);
+        waltzCtx.rotate(step.angle);
+
+        if (step.isAnchor) {
+          step.radius = (step.radius || 6) + 0.3;
+          step.alpha = Math.max(0, step.alpha - 0.008);
+          waltzCtx.strokeStyle = `rgba(44, 53, 49, ${step.alpha})`;
+          waltzCtx.beginPath();
+          waltzCtx.arc(0, 0, step.radius, 0, Math.PI * 2);
+          waltzCtx.stroke();
+        } else {
+          step.alpha = Math.max(0, step.alpha - 0.003);
+          const footColor = document.body.getAttribute('data-theme') === 'dark' ? `rgba(236, 235, 232, ${step.alpha})` : `rgba(24, 24, 26, ${step.alpha})`;
+          waltzCtx.fillStyle = footColor;
+          
+          // Footstep silhouette (sole and heel)
+          waltzCtx.beginPath();
+          waltzCtx.ellipse(0, 0, 7, 3.5, 0, 0, Math.PI * 2);
+          waltzCtx.fill();
+
+          // Step notation label
+          waltzCtx.font = "8px 'JetBrains Mono', monospace";
+          waltzCtx.fillStyle = footColor;
+          waltzCtx.fillText(`f${step.stepNum % 8 + 1}`, 9, 3);
+        }
+        waltzCtx.restore();
+      });
+
+      waltzAnimFrame = requestAnimationFrame(runWaltzLoop);
+    }
+
+    // 7. Command Palette (⌘K)
+    let cmdSelectedIndex = 0;
+    let filteredCmdItems = [];
+
+    const commandPaletteData = [
+      // Curated Projects
+      { title: "The Sidewalk Waltz: Choreographing Everyday Collision", category: "Spatial & Behavioral", badge: "Featured", action: () => openModal('sidewalk-waltz') },
+      { title: "Jo March’s Maturation: The Cost of Acceleration", category: "Slow Craft & Habit", badge: "Embroidery", action: () => openModal('jo-march') },
+      { title: "Modeling Negative Space: Physical Ergonomics & The Void", category: "Physical Prototyping", badge: "Cardboard", action: () => openModal('negative-space') },
+      { title: "Dual Pavilion: Light, Strata & Dichotomous Nature", category: "Environmental Architecture", badge: "Architecture", action: () => openModal('dual-pavilion') },
+      { title: "Curley’s Time Freeze: Kinetic Motion on Raw Strata", category: "Materiality & Form", badge: "Kinetic", action: () => openModal('curleys-time-freeze') },
+      { title: "The Skeleton of Habit: Quantified Mornings", category: "Slow Craft & Habit", badge: "Pastel", action: () => openModal('mrs-dalloway') },
+      { title: "Absence: Architectural Geometry & Minimal Scenography", category: "Spatial & Materiality", badge: "Scenography", action: () => openModal('absence') },
+      { title: "The Mediated Observer: Optics & Self-Perception", category: "Slow Craft & Habit", badge: "Pen & Ink", action: () => openModal('ramanujan') },
+      { title: "Sensory Surface: Immersion & The Membrane", category: "Materiality & Painting", badge: "Oil Canvas", action: () => openModal('plath-cellophane') },
+      { title: "Choice Paralysis & The Fig Tree: Modern Overload", category: "Slow Craft & Habit", badge: "Colored Pencil", action: () => openModal('esther-fridge') },
+      // System Actions
+      { title: "Launch The Sidewalk Waltz Generative Canvas", category: "Interactive Study", badge: "Shortcut: W", action: () => openWaltzCanvas() },
+      { title: "Toggle Color Theme (Light / Dark)", category: "System Action", badge: "Theme", action: () => themeBtn.click() },
+      { title: "Export Curatorial Portfolio as PDF", category: "System Action", badge: "Print", action: () => window.print() },
+      { title: "Jump to Artist Statement & Curatorial Philosophy", category: "Navigation", badge: "Section", action: () => { const el = document.getElementById('philosophy'); if (el) el.scrollIntoView({ behavior: 'smooth' }); } }
+    ];
+
+    function openCommandPalette() {
+      const overlay = document.getElementById('cmdPaletteOverlay');
+      const input = document.getElementById('cmdInput');
+      if (!overlay || !input) return;
+      overlay.classList.add('active');
+      input.value = '';
+      cmdSelectedIndex = 0;
+      renderCommandList('');
+      setTimeout(() => {
+        input.focus();
+      }, 40);
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCommandPalette() {
+      const overlay = document.getElementById('cmdPaletteOverlay');
+      if (!overlay) return;
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function toggleCommandPalette() {
+      const overlay = document.getElementById('cmdPaletteOverlay');
+      if (overlay && overlay.classList.contains('active')) {
+        closeCommandPalette();
+      } else {
+        openCommandPalette();
+      }
+    }
+
+    function closeCmdPaletteOnOverlay(e) {
+      const overlay = document.getElementById('cmdPaletteOverlay');
+      if (e.target === overlay) closeCommandPalette();
+    }
+
+    function renderCommandList(query) {
+      const list = document.getElementById('cmdList');
+      if (!list) return;
+
+      const q = (query || '').toLowerCase().trim();
+      filteredCmdItems = commandPaletteData.filter(item => {
+        return item.title.toLowerCase().includes(q) || item.category.toLowerCase().includes(q) || item.badge.toLowerCase().includes(q);
+      });
+
+      list.innerHTML = '';
+      if (filteredCmdItems.length === 0) {
+        list.innerHTML = '<li style="padding: 24px 20px; text-align: center; color: var(--text-muted); font-size: 0.88rem;">No matching works or actions found.</li>';
+        return;
+      }
+
+      filteredCmdItems.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.className = `cmd-item ${index === cmdSelectedIndex ? 'selected' : ''}`;
+        li.innerHTML = `
+          <div class="cmd-item-left">
+            <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-light);">${item.category} ·</span>
+            <span>${item.title}</span>
+          </div>
+          <span class="cmd-item-badge">${item.badge}</span>
+        `;
+        li.onclick = () => {
+          closeCommandPalette();
+          item.action();
+        };
+        li.onmouseenter = () => {
+          cmdSelectedIndex = index;
+          updateCmdSelection();
+        };
+        list.appendChild(li);
+      });
+    }
+
+    function updateCmdSelection() {
+      const list = document.getElementById('cmdList');
+      if (!list) return;
+      const items = list.querySelectorAll('.cmd-item');
+      items.forEach((item, idx) => {
+        item.classList.toggle('selected', idx === cmdSelectedIndex);
+        if (idx === cmdSelectedIndex) {
+          item.scrollIntoView({ block: 'nearest' });
+        }
+      });
+    }
+
+    // Input handlers
+    const cmdInputEl = document.getElementById('cmdInput');
+    if (cmdInputEl) {
+      cmdInputEl.addEventListener('input', (e) => {
+        cmdSelectedIndex = 0;
+        renderCommandList(e.target.value);
+      });
+
+      cmdInputEl.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          if (filteredCmdItems.length > 0) {
+            cmdSelectedIndex = (cmdSelectedIndex + 1) % filteredCmdItems.length;
+            updateCmdSelection();
+          }
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          if (filteredCmdItems.length > 0) {
+            cmdSelectedIndex = (cmdSelectedIndex - 1 + filteredCmdItems.length) % filteredCmdItems.length;
+            updateCmdSelection();
+          }
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          if (filteredCmdItems[cmdSelectedIndex]) {
+            closeCommandPalette();
+            filteredCmdItems[cmdSelectedIndex].action();
+          }
+        } else if (e.key === 'Escape') {
+          closeCommandPalette();
+        }
+      });
+    }
+
+    const cmdKBtn = document.getElementById('cmdKBtn');
+    if (cmdKBtn) {
+      cmdKBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleCommandPalette();
+      });
+    }
+
+    // 8. Global Keyboard Shortcuts Listener
+    document.addEventListener('keydown', (e) => {
+      const isInput = e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA';
+
+      // ⌘K or Ctrl+K (Command Palette)
+      const isK = (e.key === 'k' || e.key === 'K' || e.code === 'KeyK');
+      if ((e.metaKey || e.ctrlKey) && isK) {
+        e.preventDefault();
+        toggleCommandPalette();
+        return;
+      }
+
+      // Quick search shortcut (/)
+      if (e.key === '/' && !isInput) {
+        e.preventDefault();
+        openCommandPalette();
+        return;
+      }
+
+      // Help shortcut (?)
+      if (e.key === '?' && !isInput) {
+        e.preventDefault();
+        openCommandPalette();
+        return;
+      }
+
+      // Sidewalk Waltz shortcut (W)
+      if ((e.key === 'w' || e.key === 'W') && !isInput && 
+          !modalOverlay.classList.contains('active') && 
+          !(document.getElementById('cmdPaletteOverlay') && document.getElementById('cmdPaletteOverlay').classList.contains('active'))) {
+        if (waltzOverlay && waltzOverlay.classList.contains('active')) {
+          closeWaltzCanvas();
+        } else {
+          openWaltzCanvas();
+        }
+        return;
+      }
+
+      // Escape key handles overlays in priority order
+      if (e.key === 'Escape') {
+        const cmdOverlay = document.getElementById('cmdPaletteOverlay');
+        if (waltzOverlay && waltzOverlay.classList.contains('active')) {
+          closeWaltzCanvas();
+          return;
+        }
+        if (cmdOverlay && cmdOverlay.classList.contains('active')) {
+          closeCommandPalette();
+          return;
+        }
+      }
+    });
+
+    // Developer console note
+    console.log(
+      "%c JACQUELINE ADELMANN %c Spatial Design · Materiality · Creative Technology & Quantitative Modeling\nShortcuts: [⌘K / /] Search Palette | [W] Sidewalk Waltz Canvas | [Esc] Close",
+      "background: #2C3531; color: #FFFFFF; font-family: monospace; font-size: 12px; font-weight: bold; padding: 3px 8px; border-radius: 3px;",
+      "font-family: monospace; font-size: 11px; color: #66645E;"
+    );
+
+    // Initialize interactive systems
+    initMagneticElements();
+    initCustomCursor();
+    initCardTilt();
+
     // Theme toggle
     const themeBtn = document.getElementById('themeBtn');
     let isDark = false;
@@ -1644,5 +2722,10 @@ Beneath the artistic choreography lies structured quantitative problem solving. 
       themeBtn.textContent = isDark ? '☀ Light' : '◐ Mode';
     });
   </script>
+
+  
+
+  
+
 </body>
 </html>

@@ -1,0 +1,9 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/portfolio/index.html" },
+    { "source": "/images/:match*", "destination": "/portfolio/images/:match*" },
+    { "source": "/CURATORIAL_GUIDE.md", "destination": "/portfolio/CURATORIAL_GUIDE.md" },
+    { "source": "/portfolio", "destination": "/portfolio/index.html" }
+  ]
+}
